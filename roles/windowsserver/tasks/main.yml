@@ -1,12 +1,5 @@
 ---
-- name: Set Static IP | Windows Server
-  win_network:
-    name: Ethernet0
-    ipv4:
-      address: 192.168.1.1
-      netmask: 255.255.255.0
-      gateway: 192.168.1.254
-      dns_servers:
-        - 127.0.0.1
-        - 129.21.3.17
-    type: static
+- name: Lab 1 | Windows Server
+  hosts: windows_server
+  include:
+    - setup.yml
