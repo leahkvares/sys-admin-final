@@ -18,6 +18,7 @@ all:
           ansible_user: Administrator
           ansible_password: student
           ansible_connection: winrm
+          hostname: CHANGEME
     pfsense:
       hosts:
         pfsense_host:

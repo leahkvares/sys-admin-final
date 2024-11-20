@@ -1,1 +1,5 @@
-# script
+---
+- name: Lab 1 | Windows 10
+  hosts: windows_10
+  include:
+    - setup.yml

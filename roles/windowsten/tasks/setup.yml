@@ -1,0 +1,6 @@
+---
+- name: Set Hostname | Windows 10 SETUP
+  gather_facts: no
+  win_hostname:
+    name: "{{ hostname }}"
+  # notify: Reboot to apply hostname
