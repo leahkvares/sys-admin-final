@@ -3,9 +3,9 @@
   hosts: all
   roles:
     - pfsense-setup
-    - rocky-setup
-    - server-setup
-    - win-setup
+    - rocky
+    - windowsserver
+    - windowsten
   tags:
     - never
     - initial
