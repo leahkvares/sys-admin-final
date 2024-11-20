@@ -6,3 +6,5 @@ interface_mac_mapping:
 # LAN interface static IP settings
 lan_ip: "192.168.1.254"
 lan_netmask: "24"
+
+# this file is just like not really needed
