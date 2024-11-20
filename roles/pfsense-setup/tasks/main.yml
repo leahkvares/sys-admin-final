@@ -1,0 +1,22 @@
+---
+- name: Assign interfaces
+  ansible.builtin.template:
+    src: assign_interfaces.expect.j2
+    dest: /tmp/assign_interfaces.expect
+    mode: 0755
+
+- name: Run interface assignment script
+  ansible.builtin.command:
+    cmd: /tmp/assign_interfaces.expect
+  register: assign_interfaces_result
+
+- name: Configure LAN interface IP
+  ansible.builtin.template:
+    src: configure_interfaces.expect.j2
+    dest: /tmp/configure_interfaces.expect
+    mode: 0755
+
+- name: Run LAN interface configuration script
+  ansible.builtin.command:
+    cmd: /tmp/configure_interfaces.expect
+  register: configure_interfaces_result

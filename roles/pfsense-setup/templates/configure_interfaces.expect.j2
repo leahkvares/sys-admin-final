@@ -1,0 +1,15 @@
+#!/usr/bin/expect
+
+spawn /etc/rc.initial
+
+expect "Enter an option:" { send "2\r" }
+expect "Enter the number of the interface you wish to configure:" { send "2\r" }
+expect "Enter the new LAN IPv4 address. Press <ENTER> for none:" { send "{{ lan_ip }}\r" }
+expect "Enter the new LAN IPv4 subnet bit count (1 to 31):" { send "{{ lan_netmask }}\r" }
+expect "For a LAN, press <ENTER> for none:" { send "\r" }
+expect "Enter the new LAN IPv6 address. Press <ENTER> for none:" { send "\r" }
+expect "Do you want to enable the DHCP server on LAN? (y/n)" { send "n\r" }
+expect "Do you want to revert to HTTP as the webConfigurator protocol? (y/n)" { send "y\r" }
+expect "Press <ENTER> to continue." { send "\r" }
+
+expect eof

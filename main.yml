@@ -1,0 +1,19 @@
+---
+- name: Set Up (Lab 1)
+  hosts: all
+  roles:
+    - pfsense-setup
+    - rocky-setup
+    - server-setup
+    - win-setup
+  tags:
+    - never
+    - initial
+
+- name: AD (Lab 2)
+  hosts:
+    - 
+
+- name: Git & Linux Users (Lab 3)
+  hosts:
+    - 
