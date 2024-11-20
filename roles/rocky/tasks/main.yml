@@ -1,0 +1,6 @@
+---
+- name: Lab 1 | Rocky Linux
+  hosts: rocky_hosts
+  become: yes
+  include:
+    - setup.yml

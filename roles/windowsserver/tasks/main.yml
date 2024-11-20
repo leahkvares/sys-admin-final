@@ -1,5 +1,5 @@
 ---
-- name: Set WinServ static IP
+- name: Set Static IP | Windows Server
   win_network:
     name: Ethernet0
     ipv4:
