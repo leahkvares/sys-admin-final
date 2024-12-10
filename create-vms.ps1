@@ -3,6 +3,9 @@
   Date: 11/19/2024
   Description: This file creates and starts all of the virtual machines required for running. 
 #>
+# Variables
+$lines = "port=8697", "username=john", 'password=$2a$14$MIYvwBXHrkOEA3iAHjcS8.DJtTgpmzQDIaW.QGRW5VIwBhjpoAUQW', 'salt=*OFVN+_4:.$}v~9a'
+$filePath = "C:\path\to\your\file.txt" # Replace with your desired file path
 
 # Move to the VMrun directory
 Set-Location "C:\Program Files (x86)\VMware\VMware Workstation"
@@ -23,6 +26,14 @@ foreach ($vm in $vmList) {
     .\vmrun -T ws start "C:\Users\GCCISAdmin\Documents\Virtual Machines\SysAdminFinal\$($vm.Name).vmx"
 }
 
-Start-Sleep -Seconds 25
-Invoke-WebRequest -O "C:\Users\GCCISAdmin\vmrest.cfg" https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/vmrest.cfg
+# Wait for vms to be in ready state, and then create our file.
+Start-Sleep -Seconds 10
+New-Item -Path $filePath -ItemType File
+
+# Append each line of vmrest config file.
+foreach ($line in $lines) {
+    $line | Out-File -FilePath $filePath -Append
+}
+
+#Invoke-WebRequest -O "C:\Users\GCCISAdmin\vmrest.cfg" https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/vmrest.cfg
 .\vmrest.exe
