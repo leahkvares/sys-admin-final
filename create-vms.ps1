@@ -5,7 +5,7 @@
 #>
 # Variables
 $lines = "port=8697", "username=john", 'password=$2a$14$MIYvwBXHrkOEA3iAHjcS8.DJtTgpmzQDIaW.QGRW5VIwBhjpoAUQW', 'salt=*OFVN+_4:.$}v~9a'
-$filePath = "C:\path\to\your\file.txt" # Replace with your desired file path
+$filePath = "C:\Users\GCCISAdmin\vmrest.cfg" # Replace with your desired file path
 
 # Move to the VMrun directory
 Set-Location "C:\Program Files (x86)\VMware\VMware Workstation"
@@ -27,7 +27,7 @@ foreach ($vm in $vmList) {
 }
 
 # Wait for vms to be in ready state, and then create our file.
-Start-Sleep -Seconds 10
+Start-Sleep -Seconds 5
 New-Item -Path $filePath -ItemType File
 
 # Append each line of vmrest config file.
