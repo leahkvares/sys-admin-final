@@ -22,3 +22,7 @@ foreach ($vm in $vmList) {
     Write-Host "Starting $($vm.Name) Virtual Machine"
     .\vmrun -T ws start "C:\Users\GCCISAdmin\Documents\Virtual Machines\SysAdminFinal\$($vm.Name).vmx"
 }
+
+Start-Sleep -Seconds 25
+Invoke-WebRequest -O "C:\Users\GCCISAdmin\vmrest.cfg" https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/vmrest.cfg
+.\vmrest.exe
