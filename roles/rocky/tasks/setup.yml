@@ -1,5 +1,5 @@
 ---
-- name: Set Hostname | Rocky Linux SETUP
+- name: Set Hostname
   ansible.builtin.hostname:
     name: "DavidLeahRocky"
     use: "systemd"
@@ -26,13 +26,13 @@
     enabled: true
     state: "started"
 
-- name: Configure Static Network Config Settings | Rocky Linux SETUP
+- name: Configure Static Network Config Settings
   nmcli:
     conn_name: ens192
     ifname: ens192
     gw4: 192.168.1.254
     dns4:
-      - 129.21.3.17
+      - 192.168.1.1
       - 8.8.8.8
     state: present
     autoconnect: yes

@@ -1,5 +1,5 @@
 ---
-- name: Lab 1 | Rocky Linux
+- name: Rocky Linux Setup
   hosts: rocky_linux
   become: yes
   include:
