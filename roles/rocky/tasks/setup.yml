@@ -1,7 +1,8 @@
 ---
 - name: Set Hostname | Rocky Linux SETUP
   ansible.builtin.hostname:
-    name: "{{ rocky_hostname }}"
+    name: "DavidLeahRocky"
+    use: "systemd"
   when: ansible_distribution == "Rocky"
 
 - name: Update dnf
