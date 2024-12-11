@@ -1,9 +1,15 @@
 # Configure hostname
 Rename-Computer -NewName "DavidLeahWindowsTen" # needs reboot to take effect
 
-# Change the NIC settings to receive IPv4 network configuration via DHCP (from the Windows Server DHCP: 192.168.1.1)
+# Enable DHCP
+Set-NetIPInterface -InterfaceAlias "Ethernet0" -Dhcp Enabled
 
-# Add DNS server 192.168.1.1 and 8.8.8.8
+# Set DNS
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet0" -ServerAddresses "192.168.1.1", "8.8.8.8"
+
+# Verify the configuration
+# Get-NetIPInterface -InterfaceAlias "Ethernet0"
+# Get-DnsClientServerAddress -InterfaceAlias "Ethernet0"
 
 $username = "DAVIDLEAH\Leah"
 $password = ConvertTo-SecureString "Password123!" -AsPlainText -Force
