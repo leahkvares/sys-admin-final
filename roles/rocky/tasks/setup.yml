@@ -21,3 +21,7 @@
   handlers:
     - name: Restart network
       command: systemctl restart NetworkManager
+
+# need to join to the domain
+# Change the NIC settings on the clients to receive their respective IPv4 network configurations via DHCP (192.168.1.1)
+# Verify that the settings are configured for DHCP using the ipconfig /all command

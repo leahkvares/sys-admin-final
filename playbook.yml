@@ -1,5 +1,5 @@
 ---
-- name: Set Up (Lab 1)
+- name: Deployment
   hosts: all
   roles:
     - pfsense-setup
@@ -10,10 +10,20 @@
     - never
     - initial
 
-- name: AD (Lab 2)
+- name: Active Directory Setup
   hosts:
-    - 
+    - windows_10
+    - windows_server
+  roles:
+    - active-directory
 
-- name: Git & Linux Users (Lab 3)
+- name: Network Connectivity and DNS Validation
+
+- name: User Management # Create two users in Active Directory
   hosts:
-    - 
+    - windows_10
+    - windows_server
+  roles:
+  
+  # User1: Member of the Domain Users group
+  # User2: Member of the Domain Admins group

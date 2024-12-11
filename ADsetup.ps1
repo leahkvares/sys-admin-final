@@ -1,11 +1,30 @@
-# Script to install and configure AD, DHCP, and DNS on Windows Server
+###### Set Static IP Address, Gateway, and DNS Servers ###### 
+$interfacealias = "Ethernet0"
+$IPAddress = "192.168.1.1"
+$defaultgateway = "192.168.1.254"
+$dnsservers = @("127.0.0.1", "129.21.3.17", "8.8.8.8")
+
+Rename-Computer -NewName "DavidLeahWindowsServer" # this needs a restart to take effect
+
+# Set static IP
+Write-Host "Configuring static IP address on $interfacealias..."
+New-NetIPAddress -InterfaceAlias $interfacealias -IPAddress $IPAddress -PrefixLength 24 -DefaultGateway $defaultgateway
+
+# Set DNS servers
+Write-Host "Setting DNS servers..."
+foreach ($dns in $dnsservers) {
+    Set-DnsClientServerAddress -InterfaceAlias $interfacealias -ServerAddresses $dns
+}
+
+
+###### Install and configure AD, DHCP, and DNS on Windows Server ######
 
 # Variables
-$DomainName = "example.com"
-$NetbiosName = "EXAMPLE"
+$DomainName = "davidleah.com"
+$NetbiosName = "DAVIDLEAH"
 $AdminPassword = ConvertTo-SecureString "Password123!" -AsPlainText -Force
 $SafeModePassword = ConvertTo-SecureString "Password123!" -AsPlainText -Force
-$IPAddress = "192.168.1.10"
+# $IPAddress = "192.168.1.1"
 $PrefixLength = "24"
 $SubnetMask = "255.255.255.0"
 $Gateway = "192.168.1.254"
@@ -17,38 +36,4 @@ Install-WindowsFeature -Name AD-Domain-Services, DNS, DHCP -IncludeManagementToo
 
 # Install Active Directory and create a new forest
 Write-Host "Installing Active Directory and creating a new forest..."
-Install-ADDSForest -DomainName $DomainName -DomainNetbiosName $NetbiosName -SafeModeAdministratorPassword $SafeModePassword -InstallDNS -Force
-
-# Configure static IP address
-Write-Host "Configuring static IP address..."
-New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress $IPAddress -PrefixLength $PrefixLength -DefaultGateway $Gateway
-Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses $DNSServer
-
-# Authorize DHCP server
-Write-Host "Authorizing DHCP server..."
-Add-DhcpServerInDC -DnsName $DomainName -IPAddress $IPAddress
-
-# Configure DHCP scope
-$ScopeName = "Scope1"
-$StartRange = "192.168.1.100"
-$EndRange = "192.168.1.200"
-$LeaseDuration = "8.00:00:00" # 8 days
-$SubnetMaskBits = 24
-Write-Host "Creating DHCP scope..."
-Add-DhcpServerv4Scope -Name $ScopeName -StartRange $StartRange -EndRange $EndRange -SubnetMaskBits $SubnetMaskBits -LeaseDuration $LeaseDuration
-Set-DhcpServerv4OptionValue -ScopeId $IPAddress -OptionID 3 -Value $Gateway
-Set-DhcpServerv4OptionValue -ScopeId $IPAddress -OptionID 6 -Value $DNSServer
-
-# Confirm DNS setup
-Write-Host "Confirming DNS configuration..."
-Add-DnsServerPrimaryZone -Name $DomainName -ZoneFile $DomainName + ".dns"
-Add-DnsServerResourceRecordA -Name "Server" -ZoneName $DomainName -IPv4Address $IPAddress
-
-Write-Host "Setup completed successfully!"
-$response = Read-Host "Do you want to reboot the server now? (Y/N)"
-if ($response -eq "Y" -or $response -eq "y") {
-    Write-Host "Rebooting server..."
-    Restart-Computer -Force
-} else {
-    Write-Host "Reboot canceled."
-}
+Install-ADDSForest -DomainName $DomainName -DomainNetbiosName $NetbiosName -SafeModeAdministratorPassword $SafeModePassword -InstallDNS -NoRebootOnCompletion -Force
