@@ -22,9 +22,7 @@ netsh advfirewall set currentprofile state off
 
 
 Rocky Linux
-```
-nmcli connection up Wired\ connection\ 1
-```
+- Turn on Wired Connection
 ```
 ansible-galaxy collection install community.general
 ```
