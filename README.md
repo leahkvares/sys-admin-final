@@ -14,7 +14,7 @@ Windows Server
 Windows 10
 - Win10setup.ps1
 ```
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass
 ```
 
 
