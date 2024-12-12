@@ -41,3 +41,8 @@ Run test file:
 ```
 .\vmrun -T ws -gu "Student" -gp "student" runProgramInGuest "C:\Users\GCCISAdmin\Documents\Virtual Machines\SysAdminFinal\VLWindows_10_22h2.vmx" -noWait -activeWindow -interactive "C:\Windows\System32\cmd.exe" "/C powershell.exe -ExecutionPolicy Bypass -File C:\Users\Student\Desktop\script.ps1"
 ```
+
+Test linux
+```
+.\vmrun -T ws -gu "student" -gp "student" runProgramInGuest "C:\Users\GCCISAdmin\Documents\Virtual Machines\SysAdminFinal\Rocky 9.vmx" /bin/bash "echo hey"
+```
