@@ -36,9 +36,6 @@ if (Test-Path $filePath) {
 # Create the file and ensure it's in the correct format
 $lines | Out-File -FilePath $filePath -Encoding ascii
 
-#Invoke-WebRequest -O "C:\Users\GCCISAdmin\vmrest.cfg" https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/vmrest.cfg
-Start-Process -FilePath ".\vmrest.exe" -NoNewWindow
-
 # Wait for hosts to be alive
 Write-Host "Waiting for hosts to come to life." 
 Start-Sleep -Seconds 30
@@ -51,3 +48,7 @@ Invoke-WebRequest -O "C:\Program Files (x86)\VMware\VMware Workstation\runcmd.ps
 .\runcmd.ps1 -Target Client -Exec Powershell "curl -O 'C:\Users\Student\Desktop\script.ps1' https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/testremote.ps1" # Test remote execution
 Start-Sleep -Seconds 5 # Ensure it has time to run
 .\runcmd.ps1 -Target Client -Exec Cmd "C:\Users\Student\Desktop\script.ps1" # Test remote execution of local file
+Start-Sleep -Seconds 5 # Ensure its had time to run
+
+# Start the VMware API
+Start-Process -FilePath ".\vmrest.exe" -NoNewWindow
