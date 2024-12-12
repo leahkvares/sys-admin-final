@@ -39,5 +39,15 @@ $lines | Out-File -FilePath $filePath -Encoding ascii
 #Invoke-WebRequest -O "C:\Users\GCCISAdmin\vmrest.cfg" https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/vmrest.cfg
 Start-Process -FilePath ".\vmrest.exe" -NoNewWindow
 
-# .\vmrun -T ws -gu "Student" -gp "student" runProgramInGuest "C:\Users\GCCISAdmin\Documents\Virtual Machines\SysAdminFinal\VLWindows_10_22h2.vmx" "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" "New-Item -Path 'C:\Users\Student\Desktop\test.txt' -ItemType File"
-# https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/ADsetup.ps1
+# Wait for hosts to be alive
+Write-Host "Waiting for hosts to come to life." 
+Start-Sleep -Seconds 30
+
+# Create our runcmd file.
+Write-Host "Gathering runcmd.ps1"
+Invoke-WebRequest -O "C:\Program Files (x86)\VMware\VMware Workstation\runcmd.ps1" https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/runcmd.ps1
+
+# Use our runcmd to create test files on the windows host, just in case
+.\runcmd.ps1 -Target Client -Exec Powershell "curl -O 'C:\Users\Student\Desktop\script.ps1' https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/testremote.ps1" # Test remote execution
+Start-Sleep -Seconds 5 # Ensure it has time to run
+.\runcmd.ps1 -Target Client -Exec Cmd "C:\Users\Student\Desktop\script.ps1" # Test remote execution of local file
