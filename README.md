@@ -20,6 +20,9 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass
 
 Rocky Linux
 ```
+nmcli connection up Wired\ connection\ 1
+```
+```
 ansible-galaxy collection install community.general
 ```
 
