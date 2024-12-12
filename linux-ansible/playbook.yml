@@ -29,17 +29,12 @@
         enabled: true
         state: "started"
 
-    - name: Configure Static Network Config Settings
-      community.general.nmcli:
-        conn_name: "Wired connection 1"
-        ifname: ens192
-        gw4: 192.168.1.254
-        dns4:
-          - 192.168.1.1
-          - 8.8.8.8
-        state: present
-        autoconnect: yes
-        type: ethernet
+    - name: Configure Network Settings to Use DHCP via nmcli
+      shell: |
+        nmcli connection modify "Wired connection 1" ipv4.method auto
+        nmcli connection modify "Wired connection 1" ipv4.dns "192.168.1.1,8.8.8.8"
+        nmcli connection modify "Wired connection 1" connection.autoconnect yes
+        nmcli connection up "Wired connection 1"
       notify: Restart network
 
     - name: Check if system is already joined to the realm
