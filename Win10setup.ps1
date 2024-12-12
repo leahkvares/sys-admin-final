@@ -1,5 +1,5 @@
 # Configure hostname
-Rename-Computer -NewName "DavidLeahWindowsTen" # needs reboot to take effect
+Rename-Computer -NewName "DaveLeahWin10" # needs reboot to take effect
 
 # Enable DHCP
 Set-NetIPInterface -InterfaceAlias "Ethernet0" -Dhcp Enabled
