@@ -38,7 +38,7 @@ $lines | Out-File -FilePath $filePath -Encoding ascii
 
 # Wait for hosts to be alive
 Write-Host "Waiting for hosts to come to life." 
-Start-Sleep -Seconds 30
+Start-Sleep -Seconds 45
 
 # Create our runcmd file.
 Write-Host "Gathering runcmd.ps1"
@@ -54,7 +54,7 @@ Invoke-WebRequest -O "C:\Program Files (x86)\VMware\VMware Workstation\runcmd.ps
 # Run the first script
 Write-Host "Running AD Setup 1"
 .\runcmd.ps1 -Target Server -Exec Cmd "C:\Users\Administrator\Desktop\ADSetup.ps1" # Test remote execution of local file
-Start-Sleep 120
+Start-Sleep 180
 Write-Host "Completed AD Setup 1"
 Write-Host "Running AD Setup 2"
 .\runcmd.ps1 -Target Server -Exec Cmd "C:\Users\Administrator\Desktop\ADSetup2.ps1" # Test remote execution of local file
