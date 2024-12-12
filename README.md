@@ -16,6 +16,9 @@ Windows 10
 ```
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass
 ```
+```
+netsh advfirewall set currentprofile state off
+```
 
 
 Rocky Linux
