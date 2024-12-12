@@ -10,6 +10,15 @@
     - never
     - initial
 
+- name: Rocky Linux Setup
+  hosts:
+    - rocky_linux
+  roles:
+    - rocky
+  tags:
+    - never
+    - rocky
+
 - name: Active Directory Setup
   hosts:
     - windows_10
