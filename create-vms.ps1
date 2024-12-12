@@ -44,7 +44,7 @@ Start-Sleep -Seconds 45
 Write-Host "Gathering runcmd.ps1"
 Set-Location "C:\Users\GCCISAdmin\Desktop"
 Invoke-WebRequest -O "C:\Users\GCCISAdmin\Desktop\runcmd.ps1" https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/runcmd.ps1
-
+Start-Sleep 5 # Give me time to click into the VM so that interactive mode is running
 # Use our runcmd to create test files on the windows host, just in case
 #.\runcmd.ps1 -Target Client -Exec Powershell "curl -O 'C:\Users\Student\Desktop\script.ps1' https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/testremote.ps1" # Test remote execution
 #.\runcmd.ps1 -Target Client -Exec Cmd "C:\Users\Student\Desktop\script.ps1" # Test remote execution of local file
@@ -55,11 +55,11 @@ Invoke-WebRequest -O "C:\Users\GCCISAdmin\Desktop\runcmd.ps1" https://raw.github
 # Run the first script
 Write-Host "Running AD Setup 1"
 .\runcmd.ps1 -Target Server -Exec Cmd "C:\Users\Administrator\Desktop\ADSetup.ps1" # Test remote execution of local file
-Start-Sleep 180
+Start-Sleep 200
 Write-Host "Completed AD Setup 1"
 Write-Host "Running AD Setup 2"
 .\runcmd.ps1 -Target Server -Exec Cmd "C:\Users\Administrator\Desktop\ADSetup2.ps1" # Test remote execution of local file
-Start-Sleep 360
+Start-Sleep 565
 Write-Host "Completed AD Setup 2"
 Write-Host "Running AD Setup 3"
 .\runcmd.ps1 -Target Server -Exec Cmd "C:\Users\Administrator\Desktop\ADSetup3.ps1"
