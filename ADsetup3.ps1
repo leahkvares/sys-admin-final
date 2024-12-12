@@ -30,16 +30,6 @@ Write-Host "Confirming DNS configuration..."
 # Add-DnsServerPrimaryZone -Name $DomainName -ZoneFile "$DomainName.dns"
 Add-DnsServerResourceRecordA -Name "Server" -ZoneName $DomainName -IPv4Address $IPAddress
 
-Write-Host "Setup completed successfully!"
-$response = Read-Host "Do you want to reboot the server now? (Y/N)"
-if ($response -eq "Y" -or $response -eq "y") {
-    Write-Host "Rebooting server..."
-    Restart-Computer -Force
-} else {
-    Write-Host "Reboot canceled."
-}
-
-
 ###### CREATE USERS ######
 
 # Variables for user configuration
