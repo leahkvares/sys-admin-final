@@ -2,7 +2,7 @@
 $Password = ConvertTo-SecureString "Password123!" -AsPlainText -Force
 $User1Name = "David"
 $User2Name = "Leah"
-$OU = "OU=Users,DC=davidleah,DC=com"
+$OU = "OU=Users,DC=DAVIDLEAH,DC=COM"
 
 # Import Active Directory module
 Import-Module ActiveDirectory

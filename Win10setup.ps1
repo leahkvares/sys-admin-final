@@ -17,4 +17,8 @@ $credential = New-Object System.Management.Automation.PSCredential ($username, $
 
 # Join to the domain we made in ADsetup
 Add-Computer -DomainName "davidleah.com" -Credential $credential
-# need to reboot after this. after reboot, sign in as Other User and enter those creds
+
+Write-Host "Restarting..."
+Restart-Computer -Force
+
+# After reboot, sign in as Other User and enter those creds

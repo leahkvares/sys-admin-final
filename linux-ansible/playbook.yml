@@ -44,8 +44,10 @@
       changed_when: false
 
     - name: Join network realm if not already joined
-      ansible.builtin.shell:
-        cmd: realm join --user=Leah davidleah.com
+      expect:
+        command: realm join --user=Leah davidleah.com
+        responses:
+          "Password for Leah:": "your_password_here"
       when: "'davidleah.com' not in realm_list_result.stdout"
       become: true
 
