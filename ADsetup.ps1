@@ -4,7 +4,7 @@ $IPAddress = "192.168.1.1"
 $defaultgateway = "192.168.1.254"
 $dnsservers = @("127.0.0.1", "129.21.3.17", "8.8.8.8")
 
-Rename-Computer -NewName "DavidLeahWindowsServer" # this needs a restart to take effect
+Rename-Computer -NewName "DaveLeahWinServ" # this needs a restart to take effect
 
 # Set static IP
 Write-Host "Configuring static IP address on $interfacealias..."
@@ -34,6 +34,5 @@ $DNSServer = $IPAddress
 Write-Host "Installing AD-Domain-Services, DNS, and DHCP roles..."
 Install-WindowsFeature -Name AD-Domain-Services, DNS, DHCP -IncludeManagementTools
 
-# Install Active Directory and create a new forest
-Write-Host "Installing Active Directory and creating a new forest..."
-Install-ADDSForest -DomainName $DomainName -DomainNetbiosName $NetbiosName -SafeModeAdministratorPassword $SafeModePassword -InstallDNS -NoRebootOnCompletion -Force
+Write-Host "Restarting..."
+Restart-Computer -Force
