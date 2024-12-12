@@ -43,6 +43,6 @@ if ($Exec -ieq "Cmd") {
 }
 
 # Start the process with the arguments
-.\vmrun -T ws -gu $User -gp 'student' runProgramInGuest $HostFile -noWait -activeWindow $HostExec "$Prefix $($args[0].toString())"
+.\vmrun -T ws -gu $User -gp 'student' runProgramInGuest $HostFile -noWait -activeWindow -interactive $HostExec "$Prefix $($args[0].toString())"
 
 Set-Location $OriginalDirectory
