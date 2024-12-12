@@ -65,3 +65,8 @@ Write-Host "Running AD Setup 3"
 .\runcmd.ps1 -Target Server -Exec Cmd "C:\Users\Administrator\Desktop\ADSetup3.ps1"
 Start-Sleep 20
 Write-Host "Completed AD Setup 3"
+
+# Add scripts to the windows machine 
+Write-Host "Adding script to the windows machine"
+Start-Sleep(12)
+.\runcmd.ps1 -Target Client -Exec Powershell "curl -O 'C:\Users\Administrator\Desktop\ADSetup3.ps1' https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/Win10setup.ps1"
