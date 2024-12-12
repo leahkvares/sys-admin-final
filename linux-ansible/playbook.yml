@@ -45,9 +45,9 @@
 
     - name: Join network realm if not already joined
       expect:
-        command: realm join --user=Leah davidleah.com
+        command: realm join -U Leah DAVIDLEAH.COM
         responses:
-          "Password for Leah:": "Password123!"
+          "Password for Leah@DAVIDLEAH.COM:": "Password123!"
       when: "'davidleah.com' not in realm_list_result.stdout"
       become: true
 
