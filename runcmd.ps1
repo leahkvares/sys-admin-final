@@ -9,6 +9,7 @@ $OriginalDirectory = (Get-Item .).FullName
 $VmRunDirectory = "C:\Program Files (x86)\VMware\VMware Workstation"
 $ClientFile = "C:\Users\GCCISAdmin\Documents\Virtual Machines\SysAdminFinal\VLWindows_10_22h2.vmx"
 $ServerFile = "C:\Users\GCCISAdmin\Documents\Virtual Machines\SysAdminFinal\WinServer2k22.vmx"
+#$CommandLineArgument = $args[0]
 
 # Remote files
 $PowerShellExecutable = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
