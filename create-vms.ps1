@@ -42,7 +42,8 @@ Start-Sleep -Seconds 45
 
 # Create our runcmd file.
 Write-Host "Gathering runcmd.ps1"
-Invoke-WebRequest -O "C:\Program Files (x86)\VMware\VMware Workstation\runcmd.ps1" https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/runcmd.ps1
+Set-Location "C:\Users\GCCISAdmin\Desktop"
+Invoke-WebRequest -O "C:\Users\GCCISAdmin\Desktop\runcmd.ps1" https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/runcmd.ps1
 
 # Use our runcmd to create test files on the windows host, just in case
 #.\runcmd.ps1 -Target Client -Exec Powershell "curl -O 'C:\Users\Student\Desktop\script.ps1' https://raw.githubusercontent.com/leahkvares/sys-admin-final/refs/heads/main/testremote.ps1" # Test remote execution
