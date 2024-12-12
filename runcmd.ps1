@@ -1,41 +1,47 @@
+# Command line parameters
+param (
+  [string]$Target,
+  [string]$Exec
+)
+
 # Runs a command using the vmrun utility.
-$VmRun = "C:\Program Files (x86)\VMware Workstation\vmrun.exe"
-$VmxFiles = "C:\Users\GCCISAdmin\Documents\Virtual Machines\SysAdminFinal"
-$ClientFile = "$VmxFiles\VLWindows_10_22h2.vmx"
-$ServerFile = "$VmxFiles\WinServer2k22.vmx"
+$OriginalDirectory = (Get-Item .).FullName
+$VmRunDirectory = "C:\Program Files (x86)\VMware\VMware Workstation"
+$ClientFile = "C:\Users\GCCISAdmin\Documents\Virtual Machines\SysAdminFinal\VLWindows_10_22h2.vmx"
+$ServerFile = "C:\Users\GCCISAdmin\Documents\Virtual Machines\SysAdminFinal\WinServer2k22.vmx"
 
 # Remote files
 $PowerShellExecutable = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
 $CmdExecutable = "C:\Windows\System32\cmd.exe"
 
-# Command line parameters
-param (
-  [string]Host
-  [string]Exec
-)
+# Move directories
+Set-Location $VmRunDirectory
 
 # Decide which host we are using
-if ($Host -ieq "Server") {
+if ($Target -ieq "Server") {
     $HostFile = $ServerFile
     $User = "Administrator"
-} elseif ($Host -ieq "Client") {
+} elseif ($Target -ieq "Client") {
     $HostFile = $ClientFile
     $User = "Student"
 } else {
-    Write-Host "Unknown Host value"
+    Write-Host "Unknown Target value"
     exit 1
 }
 
 # Decide which executable we're using
 if ($Exec -ieq "Cmd") {
-  $HostExec = $CmdExecutable
-  $Arguments = "-T ws -gu '$User' -gp 'student' runProgramInGuest '$HostFile' -noWait -activeWindow -interactive '$HostExec' '/C powershell.exe -ExecutionPolicy Bypass -File $args[0]'"
+    $HostExec = $CmdExecutable
+    $Prefix = "/C $PowerShellExecutable -ExecutionPolicy Bypass -File"
 } elseif ($Exec -ieq "Powershell") {
-  $HostExec = $PowerShellExecutable
-  $Arguments = "-T ws -gu '$User' -gp 'student' runProgramInGuest '$HostFile' -noWait -activeWindow -interactive '$HostExec' '$args[0]'"
+    $HostExec = $PowerShellExecutable
+    $Prefix = ""
 } else {
-  Write-Host "Unknown Exec value"
-  exit 1
+    Write-Host "Unknown Exec value"
+    exit 1
 }
 
-Start-Process -FilePath $VmRun -ArgumentList $Arguments
+# Start the process with the arguments
+.\vmrun -T ws -gu $User -gp 'student' runProgramInGuest $HostFile -noWait -activeWindow -interactive $HostExec "$Prefix $($args[0].toString())"
+
+Set-Location $OriginalDirectory
