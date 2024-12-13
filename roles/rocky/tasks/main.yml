@@ -1,6 +1,0 @@
----
-- name: Rocky Linux Setup
-  hosts: rocky_linux
-  become: yes
-  tasks:
-    - include_tasks: setup.yml
